@@ -6,8 +6,19 @@ use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Routing\Controller as BaseController;
+use Illuminate\Http\Response;
 
 class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
+
+    static function failResponse($msg, int $code)
+    {
+        return response()->json(['status' => $code, 'error' => $msg]);
+    }
+
+    static function successResponse($data)
+    {
+    	return response()->json(['status' => Response::HTTP_OK, 'data' => $data]);
+    }
 }
