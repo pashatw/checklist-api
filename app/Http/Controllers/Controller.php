@@ -17,8 +17,18 @@ class Controller extends BaseController
         return response()->json(['status' => $code, 'error' => $msg]);
     }
 
+    // static function successResponse($data)
+    // {
+    // 	return response()->json(['status' => Response::HTTP_OK, 'data' => $data]);
+    // }
+
+    static function defaultResponse($data, $code)
+    {
+    	return response()->json($data, $code);
+    }
+
     static function successResponse($data)
     {
-    	return response()->json(['status' => Response::HTTP_OK, 'data' => $data]);
+    	return response()->json(['data' => $data], Response::HTTP_OK);
     }
 }

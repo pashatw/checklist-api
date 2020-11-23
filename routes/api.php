@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\API\UserController;
+use App\Http\Controllers\API\ChecklistController;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,5 +22,13 @@ Route::group(['middleware' => 'auth:api'], function(){
 	Route::group(['prefix' => 'user'], function () {
 		Route::get('data', [UserController::class, 'userData']);
 		Route::get('logout', [UserController::class, 'logout']);
+	});
+
+	Route::group(['prefix' => 'checklists'], function () {
+		Route::get('/', [ChecklistController::class, 'getAll']);
+		Route::post('/', [ChecklistController::class, 'create']);
+		Route::get('/{checklistId}', [ChecklistController::class, 'get']);
+		Route::patch('/{checklistId}', [ChecklistController::class, 'update']);
+		Route::delete('/{checklistId}', [ChecklistController::class, 'delete']);
 	});
 });
